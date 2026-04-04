@@ -3,10 +3,13 @@ import { LayoutDashboard, GitBranch, Code2, Settings, LogOut, ChevronLeft, Chevr
 import { useState } from 'react'
 import { useAuth } from '../../shared/context/AuthContext'
 
+import { Blocks } from 'lucide-react'
+
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
   { icon: Code2, label: 'Repositories', path: '/dashboard/repositories' },
   { icon: GitBranch, label: 'Pull Requests', path: '/dashboard/pull-requests' },
+  { icon: Blocks, label: 'Integrations', path: '/dashboard/integrations' },
   { icon: Settings, label: 'Settings', path: '/dashboard/settings' },
 ]
 

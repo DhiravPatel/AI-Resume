@@ -5,6 +5,7 @@ import DashboardPage from './pages/DashboardPage'
 import RepositoriesPage from './pages/RepositoriesPage'
 import PullRequestsPage from './pages/PullRequestsPage'
 import PRDetailPage from './pages/PRDetailPage'
+import IntegrationsPage from './pages/IntegrationsPage'
 
 export default function DashboardApp() {
   return (
@@ -18,6 +19,8 @@ export default function DashboardApp() {
             <Route path="/dashboard/repositories" element={<RepositoriesPage />} />
             <Route path="/dashboard/pull-requests" element={<PullRequestsPage />} />
             <Route path="/dashboard/pr/:id" element={<PRDetailPage />} />
+            <Route path="/dashboard/integrations" element={<IntegrationsPage />} />
+            <Route path="/dashboard/settings" element={<div className="p-8 t-text-muted">Settings coming soon...</div>} />
           </Routes>
         </main>
       </div>
