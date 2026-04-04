@@ -2,22 +2,29 @@
   "name": "api",
   "main": "src/server.ts",
   "scripts": {
-    "dev": "~/.bun/bin/bun run --watch src/server.ts",
-    "start": "~/.bun/bin/bun run src/server.ts"
+    "dev": "bun run --watch src/server.ts",
+    "start": "bun run src/server.ts",
+    "postinstall": "prisma generate"
   },
   "type": "module",
   "private": true,
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/pg": "^8.20.0",
     "prisma": "^7.6.0"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
+    "@fastify/cookie": "^11.0.2",
     "@fastify/cors": "^11.2.0",
+    "@fastify/jwt": "^10.0.0",
+    "@fastify/oauth2": "^8.2.0",
+    "@prisma/adapter-pg": "^7.6.0",
     "@prisma/client": "^7.6.0",
     "@supabase/supabase-js": "^2.101.1",
-    "fastify": "^5.8.4"
+    "fastify": "^5.8.4",
+    "pg": "^8.20.0"
   }
 }

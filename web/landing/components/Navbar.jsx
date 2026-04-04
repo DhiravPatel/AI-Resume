@@ -14,7 +14,7 @@ export default function Navbar() {
   }, [])
 
   const handleLogin = () => {
-    navigate('/dashboard')
+    navigate('/login')
   }
 
   return (

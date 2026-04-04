@@ -1,12 +1,14 @@
 export const env = {
   PORT: process.env.PORT ? parseInt(process.env.PORT, 10) : 8000,
-  SUPABASE_URL: process.env.SUPABASE_URL || '',
-  SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY || '',
-  SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY || '',
+  FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:3000',
   IS_PRODUCTION: process.env.NODE_ENV === 'production',
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID || '',
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET || '',
+  GOOGLE_REDIRECT_URI: process.env.GOOGLE_REDIRECT_URI || 'http://localhost:8000/api/v1/auth/google/callback',
+  JWT_SECRET: process.env.JWT_SECRET || 'super_secret_default_key_change_in_production',
 };
 
-// Simple validation
-if (!env.SUPABASE_URL || !env.SUPABASE_ANON_KEY) {
-  console.warn('⚠️ SUPABASE_URL or SUPABASE_ANON_KEY is missing from environment variables.');
+// Validation
+if (!env.GOOGLE_CLIENT_ID || !env.GOOGLE_CLIENT_SECRET) {
+  console.warn('⚠️ GOOGLE_CLIENT_ID or GOOGLE_CLIENT_SECRET is missing from environment variables.');
 }

@@ -57,7 +57,7 @@ export default function Hero() {
   }, [])
 
   const handleGithubConnect = () => {
-    navigate('/dashboard')
+    navigate('/login')
   }
 
   return (

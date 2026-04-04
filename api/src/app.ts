@@ -1,15 +1,49 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import { router } from './routes';
+import { env } from './config/env';
 
 export const buildApp = async () => {
   const fastify = Fastify({
     logger: true,
   });
 
-  // Register Middlewares
+  // Register CORS — allow the frontend origin
   await fastify.register(cors, {
-    origin: '*', // In production, this should be restricted
+    origin: env.IS_PRODUCTION
+      ? [env.FRONTEND_URL]
+      : ['http://localhost:3000', 'http://localhost:5173', 'http://127.0.0.1:3000'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  });
+
+  // Register cookie and JWT plugins
+  await fastify.register(require('@fastify/cookie'), {
+    secret: env.JWT_SECRET, // for cookies signature
+  });
+  
+  await fastify.register(require('@fastify/jwt'), {
+    secret: env.JWT_SECRET,
+    cookie: {
+      cookieName: 'token',
+      signed: false
+    }
+  });
+
+  // Register Google OAuth2
+  await fastify.register(require('@fastify/oauth2'), {
+    name: 'googleOAuth2',
+    credentials: {
+      client: {
+        id: env.GOOGLE_CLIENT_ID,
+        secret: env.GOOGLE_CLIENT_SECRET
+      },
+      auth: require('@fastify/oauth2').GOOGLE_CONFIGURATION
+    },
+    startRedirectPath: '/api/v1/auth/google',
+    callbackUri: env.GOOGLE_REDIRECT_URI,
+    scope: ['profile', 'email']
   });
 
   // Default root route

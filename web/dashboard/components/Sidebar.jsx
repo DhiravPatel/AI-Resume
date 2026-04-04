@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { LayoutDashboard, GitBranch, Code2, Settings, LogOut, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
+import { useAuth } from '../../shared/context/AuthContext'
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
@@ -13,6 +14,7 @@ export default function Sidebar() {
   const location = useLocation()
   const navigate = useNavigate()
   const [collapsed, setCollapsed] = useState(false)
+  const { signOut } = useAuth()
 
   return (
     <aside
@@ -86,7 +88,7 @@ export default function Sidebar() {
 
         <button
           id="sidebar-logout-btn"
-          onClick={() => navigate('/')}
+          onClick={() => signOut()}
           title={collapsed ? 'Logout' : undefined}
           className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl t-bg-input t-text-secondary hover:bg-red-500/10 hover:text-red-400 transition-all text-sm font-medium ${
             collapsed ? 'justify-center' : ''
